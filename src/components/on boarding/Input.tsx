@@ -14,7 +14,7 @@ const Input = ({
   isDark,
 }: Props) => (
   <div className="mb-3">
-    <label className="form-label">{label}</label>
+    <label className="form-label ">{label}</label>
     {type === "select" ? (
       <select
         className={`form-select ${isDark ? "bg-secondary text-light" : ""}`}
@@ -29,7 +29,9 @@ const Input = ({
     ) : (
       <input
         type="text"
-        className={`form-control ${isDark ? "bg-secondary text-light" : ""}`}
+        className={` form-control ${
+          isDark ? "bg-secondary text-light dark-placeholder" : ""
+        }`}
         placeholder={placeholder}
       />
     )}

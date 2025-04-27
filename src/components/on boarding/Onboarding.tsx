@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import Input from "./Input";
-import TravelOptionButton from "./TravelOptionButton";
+import OptionButton from "../OptionButton";
 import DarkModeButton from "../DarkModeButton";
+import { useNavigate } from "react-router-dom";
 
 const travelOptions = ["🧑 Solo", "🧑‍🤝‍🧑 Couple", "👨‍👩‍👦 Family", "👥 Friends"];
 
 const Onboarding = () => {
   const [whoWith, setWhoWith] = useState<string>("");
   const [isDark, setIsDark] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedMode = localStorage.getItem("isDark");
@@ -21,6 +23,9 @@ const Onboarding = () => {
       localStorage.setItem("isDark", String(!prev));
       return !prev;
     });
+  };
+  const moveHomePage = () => {
+    navigate("/home");
   };
 
   return (
@@ -59,18 +64,20 @@ const Onboarding = () => {
           <div className="row g-2">
             {travelOptions.map((opt) => (
               <div className="col-6" key={opt}>
-                <TravelOptionButton
+                <OptionButton
                   label={opt}
                   isSelected={whoWith === opt}
                   onClick={() => setWhoWith(opt)}
-                  isDark={isDark}
+                  color={isDark ? "secondary" : "dark"}
                 />
               </div>
             ))}
           </div>
         </div>
 
-        <button className="btn btn-primary w-100 mt-5">Continue</button>
+        <button className="btn btn-primary w-100 mt-5" onClick={moveHomePage}>
+          Continue
+        </button>
       </div>
     </div>
   );
